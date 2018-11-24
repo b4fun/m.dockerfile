@@ -9,10 +9,17 @@ RUN apk add --no-cache --virtual .build-deps \
 
 RUN apk add --no-cache \
     curl \
+    autoconf \
     imagemagick \
     libc-dev \
     libpng-dev \
     mysql-client
+
+RUN apk add --no-cache \
+    gcc
+
+RUN apk add --no-cache \
+    make
 
 RUN pecl install \
     imagick \
@@ -43,4 +50,7 @@ ENV PATH="./vendor/bin:$PATH"
 # Cleanup dev dependencies
 RUN apk del -f .build-deps
 
+COPY run.sh /usr/local/bin/
+
 WORKDIR /app/public
+ENTRYPOINT ["run.sh"]
