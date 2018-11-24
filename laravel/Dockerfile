@@ -1,4 +1,4 @@
-FROM php:alpine
+FROM php:7-fpm-alpine
 
 RUN apk add --no-cache --virtual .build-deps \
     curl-dev \
@@ -43,4 +43,4 @@ ENV PATH="./vendor/bin:$PATH"
 # Cleanup dev dependencies
 RUN apk del -f .build-deps
 
-WORKDIR /app
+WORKDIR /app/public
