@@ -8,7 +8,9 @@ if [ "${1#-}" != "$1" ]; then
 fi
 
 cd /app
-composer install
+composer install --optimize-autoloader --no-dev
+php artisan config:cache || true
+php artisan route:cache || true
 php artisan optimize || true
 chown -R www-data:www-data /app/storage
 
